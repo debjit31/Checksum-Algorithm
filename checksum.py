@@ -2,6 +2,8 @@ from operator import xor
 import sys
 import random
 flag = 0
+tm = 0
+data = []
 def count(n):
     ### Counting the number of digits for  binary representation of a deciml number
     digits = 0
@@ -13,7 +15,6 @@ def count(n):
     
 def sender():
     print("Sender's End")
-    data = []
     sum_s = 0
     n = int(input("Enter the number of data items:- "))
     print("Enter data to send : = ")
@@ -30,13 +31,18 @@ def sender():
     print("Data set to be transmitted : -",data)
     print("Sender Checksum :-",sum_s)
     print("\n")
-    tm=int(input("Choose transmissiom mode.\n1.Error-Prone.\n2.Error-free.\nEnter your choice : - "))   
+    tm = int(input("Enter transmission mode.\n1.Error-Prone/n2.Error-free\n"))
+    #print("tm = ",tm)
     if tm == 1:
-        error_generator(data)
+        error_generator()
+        receiver()
+        
     else:
-        receiver(data)
-                
-def receiver(data):
+        receiver()
+        
+        
+                    
+def receiver():
     print("Welcome to Receiver's End")
     sum_r = 0
     print("Dataset received by receiver is  = ",data)
@@ -54,22 +60,25 @@ def receiver(data):
     print("Receiver Checksum :- ",sum_r)
     data_checker(sum_r)
     
-def error_generator(data):
+def error_generator():
+    offset  = 0
     for i in range(random.randint(0,5)):
         #generating a random position from the list
-        rp= random.randint(-1,len(data)-1)
+        rp= random.randint(0,len(data)-1)
         #print(data[rp])
         #generating a random offset value to multiply with the original data
-        offset = random.randint(1,10)
+        offset = random.randint(10,30)
         data[rp] += offset 
-    receiver(data)
+    
     
 def data_checker(sum_r):
     ## if the complemented sum is 0 , the data is correct
     if sum_r == 0:
         print("Transmission Successfull!!!!")
+        data.clear()
     else:
-        print("Error in Transmission")    
+        print("Error in Transmission")
+        data.clear()
         flag = 1
         program_runner()
 
