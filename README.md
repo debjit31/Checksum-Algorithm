@@ -4,8 +4,4 @@ Algorithm that performs functions of a Checksum generator and checker used widel
 
 Clone download the file checksum.py and run it in a Python Developement environment.
 
-Will be  corrected soon!!!!
-
-
-
-Happy Coding!!
+Happy Coding!!!!!!
